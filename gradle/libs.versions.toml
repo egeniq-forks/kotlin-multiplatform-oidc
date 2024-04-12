@@ -9,9 +9,9 @@ agp = "8.2.2"
 
 #https://github.com/JetBrains/compose-multiplatform
 compose-multiplatform = "1.5.11"
-kotlin = "1.9.22"
+kotlin = "1.9.23"
 # https://github.com/google/ksp
-ksp = "1.9.22-1.0.17"
+ksp = "1.9.23-1.0.20"
 kotlin-inject = "0.6.3"
 
 #https://mvnrepository.com/artifact/org.jetbrains.compose.compiler/compiler
@@ -120,7 +120,6 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kmp = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin"}
 sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-nexusPublish = { id = "io.github.gradle-nexus.publish-plugin", version.ref = "nexus-publish-plugin"}
 multiplatform-swiftpackage = { id = "io.github.luca992.multiplatform-swiftpackage", version.ref = "multiplatform-swiftpackage" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 swiftklib = { id = "io.github.ttypic.swiftklib", version.ref = "swiftklib" }

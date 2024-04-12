@@ -203,3 +203,10 @@ ktor's refresh logic, e.g. on logout:
 ```kotlin
     ktorHttpClient.clearTokens()
 ```
+
+### Releasing a new version on GitHub Packages, for our own purposes
+
+1. Make sure to increase the version in gradle.properties
+2. Make sure that your GPG keys are set up correctly. In local.properties you should have a key ID (8 chars long), an ASCII armored secret key (escaped with `\n` so that it stays 1 line long), and the password for the secret key.
+3. Make sure that youg GPG key is published on a public key server.
+4. Build and publish everything using the command: `./gradlew publish`
