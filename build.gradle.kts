@@ -9,21 +9,25 @@ plugins {
     alias(libs.plugins.kmp) apply false
     alias(libs.plugins.multiplatform.swiftpackage) apply false
     alias(libs.plugins.dokka)
-    alias(libs.plugins.nexusPublish)
+    id("maven-publish")
 }
 
 subprojects {
     group = "io.github.kalinjul.kotlin.multiplatform"
 }
 
-nexusPublishing {
-    repositories {
-        sonatype {
-            nexusUrl.set(uri("https://ossrh-staging-api.central.sonatype.com/service/local/"))
-            snapshotRepositoryUrl.set(uri("https://central.sonatype.com/repository/maven-snapshots/"))
-            stagingProfileId.set(getLocalProperty("SONATYPE_STAGING_PROFILE_ID") ?: System.getenv("SONATYPE_STAGING_PROFILE_ID"))
-            username.set(getLocalProperty("OSSRH_USERNAME") ?: System.getenv("OSSRH_USERNAME"))
-            password.set(getLocalProperty("OSSRH_PASSWORD") ?: System.getenv("OSSRH_PASSWORD"))
+subprojects {
+    apply(plugin = "maven-publish")
+    configure<PublishingExtension> {
+        repositories {
+            maven {
+                name = "GitHubPackages"
+                url = uri("https://maven.pkg.github.com/egeniq-forks/kotlin-multiplatform-oidc")
+                credentials {
+                    username = getLocalProperty("GITHUB_USER") ?: System.getenv("GITHUB_USER")
+                    password = getLocalProperty("GITHUB_OIDC_TOKEN") ?: System.getenv("GITHUB_OIDC_TOKEN")
+                }
+            }
         }
     }
 }

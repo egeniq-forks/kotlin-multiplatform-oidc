@@ -47,7 +47,7 @@ class MavenCentralPublishConventionPlugin : Plugin<Project> {
                             // description seems to be only available after evaluation
                             pom.description.set(project.description)
                         }
-                        url.set("https://github.com/kalinjul/kotlin-multiplatform-oidc")
+                        url.set("https://github.com/egeniq-forks/kotlin-multiplatform-oidc")
                         licenses {
                             license {
                                 name.set("Apache-2.0 License")
@@ -71,9 +71,9 @@ class MavenCentralPublishConventionPlugin : Plugin<Project> {
                                 }
                             }
                             scm {
-                                connection.set("scm:git:github.com/kalinjul/kotlin-multiplatform-oidc.git")
-                                developerConnection.set("scm:git:ssh://github.com/kalinjul/kotlin-multiplatform-oidc.git")
-                                url.set("https://github.com/kalinjul/kotlin-multiplatform-oidc/tree/main")
+                                connection.set("scm:git:github.com/egeniq-forks/kotlin-multiplatform-oidc.git")
+                                developerConnection.set("scm:git:ssh://github.com/egeniq-forks/kotlin-multiplatform-oidc.git")
+                                url.set("https://github.com/egeniq-forks/kotlin-multiplatform-oidc/tree/main")
                             }
                         }
                     }
