@@ -50,7 +50,7 @@ kotlin {
 
 swiftklib {
     create("KCrypto") {
-        this.minIos = 15
+        this.minIos = 13
         path = file("native/KCrypto")
         packageName("org.publicvalue.multiplatform.oidc.util")
     }
