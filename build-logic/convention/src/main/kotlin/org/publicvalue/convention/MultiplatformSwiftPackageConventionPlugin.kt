@@ -19,7 +19,7 @@ class MultiplatformSwiftPackageConventionPlugin : Plugin<Project> {
             extensions.configure<SwiftPackageExtension> {
                 swiftToolsVersion("5.6")
                 targetPlatforms {
-                    iOS { v("15") }
+                    iOS { v("13") }
                     macOS {v("15") }
                     tvOS { v("15") }
                 }
