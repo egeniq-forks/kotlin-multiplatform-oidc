@@ -210,3 +210,4 @@ ktor's refresh logic, e.g. on logout:
 2. Make sure that your GPG keys are set up correctly. In local.properties you should have a key ID (8 chars long), an ASCII armored secret key (escaped with `\n` so that it stays 1 line long), and the password for the secret key.
 3. Make sure that youg GPG key is published on a public key server.
 4. Build and publish everything using the command: `./gradlew publish`. This process takes about 28-30 minutes.
+5. Note that the Xcode version you are building the framework with, should be lower or equal than the framework the app is built with (in GitHub Actions, for example). Otherwise you could get cryptic errors such as [this one](https://forums.developer.apple.com/forums/thread/749915).

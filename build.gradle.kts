@@ -14,9 +14,6 @@ plugins {
 
 subprojects {
     group = "io.github.kalinjul.kotlin.multiplatform"
-}
-
-subprojects {
     apply(plugin = "maven-publish")
     configure<PublishingExtension> {
         repositories {
