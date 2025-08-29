@@ -42,28 +42,37 @@ actual class PlatformCodeAuthFlow(
     override suspend fun getAuthorizationCode(request: AuthCodeRequest): AuthCodeResponse = wrapExceptions {
         val authResponse = suspendCoroutine { continuation ->
             val nsurl = NSURL.URLWithString(request.url.toString())
+            val callbackScheme = request.config.redirectUri?.let { Url(it) }?.protocol?.name?.lowercase()
+            val isCustomScheme = callbackScheme != "http" && callbackScheme != "https"
             if (nsurl != null) {
-                val session = ASWebAuthenticationSession(
-                    uRL = nsurl,
-                    callbackURLScheme = request.config.redirectUri?.let { Url(it) }?.protocol?.name,
-                    completionHandler = object : ASWebAuthenticationSessionCompletionHandler {
-                        override fun invoke(p1: NSURL?, p2: NSError?) {
-                            if (p1 != null) {
-                                val url = Url(p1.toString()) // use sane url instead of NS garbage
-                                val code = url.parameters["code"] ?: ""
-                                val state = url.parameters["state"] ?: ""
+                val session: ASWebAuthenticationSession
+                if (isCustomScheme) {
+                    session = ASWebAuthenticationSession(
+                        uRL = nsurl,
+                        callbackURLScheme = callbackScheme,
+                        completionHandler = object : ASWebAuthenticationSessionCompletionHandler {
+                            override fun invoke(p1: NSURL?, p2: NSError?) {
+                                if (p1 != null) {
+                                    val url = Url(p1.toString()) // use sane url instead of NS garbage
+                                    val code = url.parameters["code"] ?: ""
+                                    val state = url.parameters["state"] ?: ""
 
-                                continuation.resume(AuthCodeResponse.success(AuthCodeResult(code = code, state = state)))
-                            } else {
-                                if (p2 != null) {
-                                    continuation.resume(AuthCodeResponse.failure<AuthCodeResult>(OpenIdConnectException.AuthenticationFailure(p2.localizedDescription)))
+                                    continuation.resume(AuthCodeResponse.success(AuthCodeResult(code = code, state = state)))
                                 } else {
-                                    continuation.resume(AuthCodeResponse.failure<AuthCodeResult>(OpenIdConnectException.AuthenticationFailure("No message")))
+                                    if (p2 != null) {
+                                        continuation.resume(AuthCodeResponse.failure<AuthCodeResult>(OpenIdConnectException.AuthenticationFailure(p2.localizedDescription)))
+                                    } else {
+                                        continuation.resume(AuthCodeResponse.failure<AuthCodeResult>(OpenIdConnectException.AuthenticationFailure("No message")))
+                                    }
                                 }
                             }
                         }
-                    }
-                )
+                    )
+                } else {
+                    session = ASWebAuthenticationSession(
+
+                    )
+                }
                 session.prefersEphemeralWebBrowserSession = ephemeralBrowserSession
                 session.presentationContextProvider = PresentationContext()
 
