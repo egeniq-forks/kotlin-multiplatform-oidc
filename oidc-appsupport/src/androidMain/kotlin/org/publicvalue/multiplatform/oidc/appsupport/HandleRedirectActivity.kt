@@ -170,7 +170,7 @@ class HandleRedirectActivity : ComponentActivity() {
 
         val intent = builder.build()
 
-        preferredBrowserPackage.let { intent.intent.setPackage(it) }
+        // preferredBrowserPackage.let { intent.intent.setPackage(it) } Disabled because bug
         intent.launchUrl(this, url.toUri())
     }
 

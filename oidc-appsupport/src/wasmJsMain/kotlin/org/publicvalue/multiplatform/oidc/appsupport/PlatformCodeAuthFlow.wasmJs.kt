@@ -33,6 +33,10 @@ actual class PlatformCodeAuthFlow(
         return Result.success(Unit)
     }
 
+    actual override fun handleUrl(url: String) {
+        // Only supported on iOS
+    }
+
     companion object {
         @ExperimentalOpenIdConnect
         fun handleRedirect() {

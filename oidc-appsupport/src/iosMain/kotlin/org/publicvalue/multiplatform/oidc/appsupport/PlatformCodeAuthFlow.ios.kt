@@ -59,6 +59,10 @@ actual class PlatformCodeAuthFlow(
             EndSessionResponse.failure(OpenIdConnectException.AuthenticationCancelled("Logout cancelled"))
         }
     }
+
+    actual override fun handleUrl(url: String) {
+        webFlow.handleUrl(url)
+    }
 }
 
 class PresentationContext: NSObject(), ASWebAuthenticationPresentationContextProvidingProtocol {

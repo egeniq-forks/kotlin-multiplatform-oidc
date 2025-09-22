@@ -13,4 +13,5 @@ expect class PlatformCodeAuthFlow: CodeAuthFlow, EndSessionFlow {
     override suspend fun getAuthorizationCode(request: AuthCodeRequest): AuthCodeResponse
     override suspend fun endSession(request: EndSessionRequest): EndSessionResponse
     override val client: OpenIdConnectClient
+    override fun handleUrl(url: String)
 }

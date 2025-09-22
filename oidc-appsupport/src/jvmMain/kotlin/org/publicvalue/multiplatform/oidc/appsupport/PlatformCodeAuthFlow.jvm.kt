@@ -56,6 +56,10 @@ actual class PlatformCodeAuthFlow(
         return EndSessionResponse.success(Unit)
     }
 
+    actual override fun handleUrl(url: String) {
+        // Only supported on iOS
+    }
+
     @OptIn(ExperimentalContracts::class)
     private fun checkRedirectPort(redirectUrl: Url?) {
         contract {

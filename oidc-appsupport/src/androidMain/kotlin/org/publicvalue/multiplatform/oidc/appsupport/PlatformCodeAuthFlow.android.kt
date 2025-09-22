@@ -74,6 +74,10 @@ actual class PlatformCodeAuthFlow(
         }
     }
 
+    actual override fun handleUrl(url: String) {
+        // Only supported on iOS
+    }
+
     @OptIn(ExperimentalContracts::class)
     private fun <T> getErrorResult(responseUri: Uri?): Result<T>? {
         contract { returns(null) implies (responseUri != null) }

@@ -26,6 +26,9 @@ import kotlin.native.ObjCName
 interface CodeAuthFlow {
     val client: OpenIdConnectClient
 
+    @Suppress("unused")
+    fun handleUrl(url: String)
+
     /**
      * For some reason the default parameter is not available in Platform implementations,
      * so this provides an empty parameter method instead.
